@@ -236,10 +236,19 @@ Application::MIDILoop(void)
         if (CompareMidiMessage(*messageIn, LaunchKey::Play))
             isPlaying = false;
 
-        std::cout   << "channel: " << messageIn->channel
-                    << " status: " << messageIn->status
-                    << " data1: " << messageIn->data1.value()
-                    << " data2: " << messageIn->data2.value() << std::endl;
+        if (!messageIn->data2)
+        {
+            std::cout   << "channel: " << messageIn->channel
+                        << " status: " << messageIn->status
+                        << " data1: " << messageIn->data1.value() << std::endl;
+        }
+        else
+        {
+            std::cout   << "channel: " << messageIn->channel
+                        << " status: " << messageIn->status
+                        << " data1: " << messageIn->data1.value()
+                        << " data2: " << messageIn->data2.value() << std::endl;
+        }
     }
 
     if (mode == 1)
