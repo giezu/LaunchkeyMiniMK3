@@ -29,7 +29,10 @@ Application::InitMIDI(void)
         "1: Color checker" << std::endl << 
         "2: Mario" << std::endl <<
         "3: Disco" << std::endl <<
-        "4: Touch" << std::endl;
+        "4: Touch" << std::endl <<
+        "5: Toggle" << std::endl <<
+        "6: PC" << std::endl <<
+        "7: Drum mode 2" << std::endl;
 
     std::cin >> mode;
 
@@ -41,6 +44,15 @@ Application::InitMIDI(void)
 
     if (mode == 3 || mode == 4)
         midiOut->SendMidiMessage(LaunchKey::PadModeDrum);
+
+    if (mode == 5)
+        midiOut->SendMidiMessage(LaunchKey::PadModeToggle);
+
+    if (mode == 6)
+        midiOut->SendMidiMessage(LaunchKey::PadModePC);
+
+    if (mode == 7)
+        midiOut->SendMidiMessage(LaunchKey::PadModeDrum2);
 }
 
 void

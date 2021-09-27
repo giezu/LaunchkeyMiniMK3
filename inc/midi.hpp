@@ -134,6 +134,30 @@ namespace LaunchKey
         .data2      =   0x00
     };
 
+    const   MidiMessage PadModeToggle =
+    {
+        .channel    =   MidiChannel::CH16,
+        .status     =   MidiStatus::CC,
+        .data1      =   0x03,
+        .data2      =   0x07
+    };
+
+    const   MidiMessage PadModePC =
+    {
+        .channel    =   MidiChannel::CH16,
+        .status     =   MidiStatus::CC,
+        .data1      =   0x03,
+        .data2      =   0x08
+    };
+
+    const   MidiMessage PadModeDrum2 =
+    {
+        .channel    =   MidiChannel::CH16,
+        .status     =   MidiStatus::CC,
+        .data1      =   0x03,
+        .data2      =   0x06
+    };
+
     const   MidiMessage PadModeCustom =
     {
         .channel    =   MidiChannel::CH16,
