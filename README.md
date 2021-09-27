@@ -72,11 +72,19 @@ Channel|Status|Data1|Info
 ### Pad modes
 You can change pad mode by sending CC message on channel 16.
 It's the same thing as changing modes by holding shift and choosing mode with orange pads.
+
+edit 27.09.2021: as found by [riban-nw](https://github.com/giezu/LaunchkeyMiniMK3/issues/1) there are few more undocumented modes.
+
+Modes 6-8 replace Custom mode until you reboot Launchkey Mini MK3.
+
 Channel|Status|Data1|Data2|Info
 -------|------|-----|-----|----
 16|CC|3(D#-2)|1|Drum pad mode
 16|CC|3(D#-2)|2|Session pad mode
 16|CC|3(D#-2)|5|Custom pad mode
+16|CC|3(D#-2)|6|Drum 2 pad mode
+16|CC|3(D#-2)|7|Toggle pad mode
+16|CC|3(D#-2)|8|Program Change pad mode
 
 Device should reply with the same message.
 Keep in mind that custom mode requires listening on **Launchkey Mini MK3 MIDI 1** port.
