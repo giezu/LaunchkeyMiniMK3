@@ -73,9 +73,9 @@ Channel|Status|Data1|Info
 You can change pad mode by sending CC message on channel 16.
 It's the same thing as changing modes by holding shift and choosing mode with orange pads.
 
-edit 27.09.2021: as found by [riban-nw](https://github.com/giezu/LaunchkeyMiniMK3/issues/1) there are few more undocumented modes.
+edit 27.09.2021: as found by [riban-bw](https://github.com/riban-bw) there are few more undocumented modes.
 
-Modes 6-8 replace Custom mode until you reboot Launchkey Mini MK3.
+Modes 6-8 replace Custom mode as found [here](https://github.com/giezu/LaunchkeyMiniMK3/issues/1) until you reboot Launchkey Mini MK3.
 
 Channel|Status|Data1|Data2|Info
 -------|------|-----|-----|----
