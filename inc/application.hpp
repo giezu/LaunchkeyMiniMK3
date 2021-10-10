@@ -32,6 +32,9 @@ class Application
         void
         MIDILoop(void);
 
+        void
+        Brightness(void);
+
     public:
 
         Application(){};

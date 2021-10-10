@@ -134,6 +134,14 @@ namespace LaunchKey
         .data2      =   0x00
     };
 
+    const   MidiMessage PadBrightness =
+    {
+        .channel    =   MidiChannel::CH16,
+        .status     =   MidiStatus::CC,
+        .data1      =   0x00,
+        .data2      =   0x60
+    };
+
     const   MidiMessage PadModeToggle =
     {
         .channel    =   MidiChannel::CH16,
@@ -328,6 +336,16 @@ namespace LaunchKey
         K6,
         K7,
         K8
+    };
+
+    // % of brightness -> 0, 25, 50, 75, 100%
+    enum Brightness
+    {
+        P0      =   0x00,
+        P25     =   0x20,
+        P50     =   0x30,
+        P75     =   0x40,
+        P100    =   0x60
     };
 }
 

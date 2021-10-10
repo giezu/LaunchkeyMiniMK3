@@ -32,14 +32,15 @@ Application::InitMIDI(void)
         "4: Touch" << std::endl <<
         "5: Toggle" << std::endl <<
         "6: PC" << std::endl <<
-        "7: Drum mode 2" << std::endl;
+        "7: Drum mode 2" << std::endl <<
+        "8: Brightness" << std::endl;
 
     std::cin >> mode;
 
     midiOut->OpenPort(n);
     midiOut->SendMidiMessage(LaunchKey::DAWModeOn);
 
-    if (mode == 1 || mode == 2)
+    if (mode == 1 || mode == 2 || mode == 8)
         midiOut->SendMidiMessage(LaunchKey::PadModeSession);
 
     if (mode == 3 || mode == 4)
@@ -53,6 +54,11 @@ Application::InitMIDI(void)
 
     if (mode == 7)
         midiOut->SendMidiMessage(LaunchKey::PadModeDrum2);
+
+    MidiMessage message = LaunchKey::Play;
+    message.channel = MidiChannel::CH2;
+    message.data2 = 0x01;
+    midiOut->SendMidiMessage(message);
 }
 
 void
@@ -87,7 +93,7 @@ Application::ColorPicker(std::optional<MidiMessage> message)
     }
     for (int i = 0; i < 8; ++i)
     {
-        colMessage.data1   =   LaunchKey::SessionPads::SP8 + i;
+        colMessage.data1   =   LaunchKey::SessionPads::SP9 + i;
         midiOut->SendMidiMessage(colMessage);
     }
 }
@@ -127,7 +133,7 @@ Application::Mario(void)
 
     for (int i = 0; i < 8; ++i)
     {
-        colMessage.data1   =   LaunchKey::SessionPads::SP8 + i;
+        colMessage.data1   =   LaunchKey::SessionPads::SP9 + i;
         colMessage.data2   =   mario[numRow+1][i+4];
         midiOut->SendMidiMessage(colMessage);
     }
@@ -240,6 +246,34 @@ Application::Touch(std::optional<MidiMessage> message)
 }
 
 void
+Application::Brightness(void)
+{
+    static bool init = false;
+
+    if (init) return;
+    MidiMessage message = LaunchKey::PadBrightness;
+
+    // up arrow
+    message.data1 = 0x68;
+    message.data2 = LaunchKey::Brightness::P50;
+    midiOut->SendMidiMessage(message);
+
+    // down arrow
+    message.data1 = 0x69;
+    message.data2 = LaunchKey::Brightness::P75;
+    midiOut->SendMidiMessage(message);
+
+    // record button
+    message.data1 = 0x75;
+    message.data2 = LaunchKey::Brightness::P100;
+    midiOut->SendMidiMessage(message);
+
+    message.status = MidiStatus::NON;
+
+    init = true;
+}
+
+void
 Application::MIDILoop(void)
 {
     std::optional<MidiMessage>  messageIn = midiIn->GetMidiMessage();
@@ -276,6 +310,9 @@ Application::MIDILoop(void)
     // Touch
     else if (mode == 4)
         Touch(messageIn);
+
+    else if (mode == 8)
+        Brightness();
 }
 
 void
@@ -325,10 +362,15 @@ Application::Run(void)
         }
         for (int i = 0; i < 8; ++i)
         {
-            colMessage.data1   =   LaunchKey::SessionPads::SP8 + i;
+            colMessage.data1   =   LaunchKey::SessionPads::SP9 + i;
             midiOut->SendMidiMessage(colMessage);
         }
     }
+
+    MidiMessage message = LaunchKey::Play;
+    message.channel = MidiChannel::CH2;
+    message.data2 = LaunchKey::Brightness::P0;
+    midiOut->SendMidiMessage(message);
 
     midiOut->SendMidiMessage(LaunchKey::DAWModeOff);
 }
