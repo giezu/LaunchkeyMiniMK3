@@ -270,6 +270,14 @@ namespace LaunchKey
         .data2      =   0x7F
     };
 
+    const   MidiMessage Shift   =
+    {
+        .channel    =   MidiChannel::CH1,
+        .status     =   MidiStatus::CC,
+        .data1      =   0x6C,
+        .data2      =   0x7F
+    };
+
     const   MidiMessage Play    =
     {
         .channel    =   MidiChannel::CH16,
