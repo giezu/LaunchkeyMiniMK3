@@ -59,6 +59,7 @@ Channel|Status|Data1|Data2|Info
 -------|------|-----|-----|----
 1|CC|104(G#6)|127/0|Up button press/release
 1|CC|105(A6)|127/0|Down button press/release
+1|CC|108(C7)|127/0|Shift button press/release
 16|CC|103(G6)|127/0|Left button press/release
 16|CC|102(F#6)|127/0|Right button press/release
 16|CC|115(G7)|127/0|Play button press/release
@@ -72,11 +73,19 @@ Channel|Status|Data1|Info
 ### Pad modes
 You can change pad mode by sending CC message on channel 16.
 It's the same thing as changing modes by holding shift and choosing mode with orange pads.
+
+edit 27.09.2021: as found by [riban-bw](https://github.com/riban-bw) there are few more undocumented modes.
+
+Modes 6-8 replace Custom mode as found [here](https://github.com/giezu/LaunchkeyMiniMK3/issues/1) until you reboot Launchkey Mini MK3.
+
 Channel|Status|Data1|Data2|Info
 -------|------|-----|-----|----
 16|CC|3(D#-2)|1|Drum pad mode
 16|CC|3(D#-2)|2|Session pad mode
 16|CC|3(D#-2)|5|Custom pad mode
+16|CC|3(D#-2)|6|Drum 2 pad mode
+16|CC|3(D#-2)|7|Toggle pad mode
+16|CC|3(D#-2)|8|Program Change pad mode
 
 Device should reply with the same message.
 Keep in mind that custom mode requires listening on **Launchkey Mini MK3 MIDI 1** port.
@@ -120,3 +129,23 @@ Channel|Status|Data1|Data2|Info
 **12**|Note On|96(C6)|9|Color top-left pad with **pulsing** orange in **drum** mode
 
 Bonus: flashing pad toggles between previous color and current (flashing) color. This way you can send solid color followed by flashing color to flash between two different colors e.g. green/red/green/red... If you want to flash between disabled and color led you have to send black (0) solid color first.
+
+### Other buttons (by [riban-bw](https://github.com/riban-bw))
+You can color both Up and Down buttons by sending CC message on channel 1, 2, 3 (same as **session** color modes).
+
+Examples:
+Channel|Status|Data1|Data2|Info
+-------|------|-----|-----|----
+**1**|CC|104(G#6)|9|Color Up pad with **solid** orange color
+**2**|CC|105(A6)|21|Color Down pad with **flashing** green color
+
+You can change **brightness** of Up, Down, Play, Pause buttons by sending CC message on channel 16.
+Possible brightness values: 0%, 25%, 50%, 75% and 100%
+
+Examples:
+Channel|Status|Data1|Data2|Info
+-------|------|-----|-----|----
+16|CC|104(G#6)|32|Up pad with 25% brightness
+16|CC|105(A6)|48|Down pad with 50% brightness
+16|CC|115(G7)|64|Play button with 75% brightness
+16|CC|117(A7)|96|Record button with 100% brightness
