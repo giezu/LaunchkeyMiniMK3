@@ -132,12 +132,17 @@ Bonus: flashing pad toggles between previous color and current (flashing) color.
 
 ### Other buttons (by [riban-bw](https://github.com/riban-bw))
 You can color both Up and Down buttons by sending CC message on channel 1, 2, 3 (same as **session** color modes).
+Also Play and Record buttons react to these color modes but only white color is supported.
 
 Examples:
 Channel|Status|Data1|Data2|Info
 -------|------|-----|-----|----
 **1**|CC|104(G#6)|9|Color Up pad with **solid** orange color
 **2**|CC|105(A6)|21|Color Down pad with **flashing** green color
+**3**|CC|105(A6)|49|Color Down pad with **pulsing** purple color
+**1**|CC|115(G7)|127|Play button with **solid** white
+**2**|CC|117(G7)|127|Record button with **flashing** white
+**3**|CC|115(G7)|127|Play button with **pulsing** white
 
 You can change **brightness** of Up, Down, Play, Pause buttons by sending CC message on channel 16.
 Possible brightness values: 0%, 25%, 50%, 75% and 100%
